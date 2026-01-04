@@ -1,0 +1,24 @@
+---
+import type { SocialLink } from '../types';
+import { Icon } from './Icon';
+
+interface Props {
+  socials: SocialLink[];
+}
+
+const { socials } = Astro.props;
+---
+
+<div class="flex justify-center gap-4 mt-8 animate-slide-up" style="animation-delay: 200ms;">
+  {socials.map((social) => (
+    <a 
+      href={social.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-slate-400 hover:text-purple-400 hover:scale-110 transition-all duration-200"
+      aria-label={social.platform}
+    >
+      <Icon name={social.icon} size={24} />
+    </a>
+  ))}
+</div>

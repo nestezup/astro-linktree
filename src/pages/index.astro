@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Profile from '../components/Profile.astro';
+import LinkCard from '../components/LinkCard.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { profileData, linksData } from '../data/mock';
+
+// Sort links by order
+const sortedLinks = [...linksData].sort((a, b) => a.order - b.order);
+---
+
+<Layout title={`${profileData.name} | Linktree`}>
+	<div class="flex flex-col w-full">
+		<Profile profile={profileData} />
+		
+		<div class="flex flex-col gap-2 w-full animate-slide-up" style="animation-delay: 100ms;">
+			{sortedLinks.map((link) => (
+				<LinkCard link={link} />
+			))}
+		</div>
+
+		<div class="mt-8 text-center animate-slide-up" style="animation-delay: 250ms;">
+			<a href="/about" class="text-sm text-purple-300 hover:text-white underline underline-offset-4 transition-colors">
+				More about me &rarr;
+			</a>
+		</div>
+
+		<SocialLinks socials={profileData.socials} />
+        
+        <footer class="mt-12 text-center text-xs text-slate-500 animate-slide-up" style="animation-delay: 300ms;">
+            <p>Built with Astro & Tailwind</p>
+        </footer>
+	</div>
+</Layout>

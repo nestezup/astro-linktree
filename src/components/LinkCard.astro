@@ -1,0 +1,30 @@
+---
+import type { Link } from '../types';
+import { Icon } from './Icon';
+
+interface Props {
+  link: Link;
+}
+
+const { link } = Astro.props;
+---
+
+<a 
+  href={`/api/go/${link.id}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="glass-button block w-full mb-4 p-4 rounded-xl flex items-center group transform transition-all hover:scale-[1.02] hover:-translate-y-1 hover:shadow-purple-500/20"
+>
+  {link.icon && (
+    <div class="text-purple-400 group-hover:text-white transition-colors">
+      <Icon name={link.icon} size={20} />
+    </div>
+  )}
+  
+  <span class="flex-1 text-center font-medium text-slate-200 group-hover:text-white transition-colors">
+    {link.title}
+  </span>
+  
+  {/* Spacer for centering if icon exists */}
+  {link.icon && <div class="w-5"></div>}
+</a>

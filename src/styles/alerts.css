@@ -1,0 +1,42 @@
+/* GitHub Alert Styles */
+.markdown-alert {
+  border-left: 0.25em solid;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.markdown-alert-note {
+  border-color: #6366f1;
+}
+
+/* Indigo */
+.markdown-alert-tip {
+  border-color: #22c55e;
+}
+
+/* Green */
+.markdown-alert-important {
+  border-color: #a855f7;
+}
+
+/* Purple */
+.markdown-alert-warning {
+  border-color: #f59e0b;
+}
+
+/* Amber */
+.markdown-alert-caution {
+  border-color: #ef4444;
+}
+
+/* Red */
+
+.markdown-alert-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  color: inherit;
+}

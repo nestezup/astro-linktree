@@ -1,0 +1,41 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+    description?: string;
+    frontmatter?: {
+        title: string;
+        description?: string;
+    };
+}
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title || Astro.props.title || "Linktree Clone";
+const description = frontmatter?.description || Astro.props.description || "Astro Linktree Clone";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+        <meta name="description" content={description} />
+		<title>{title}</title>
+        
+        <!-- Google Fonts: Inter -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
+        <div class="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20 pointer-events-none"></div>
+		<main class="relative z-10 min-h-screen flex flex-col items-center justify-center p-4">
+            <div class="w-full max-w-md mx-auto animate-fade-in">
+			    <slot />
+            </div>
+		</main>
+	</body>
+</html>

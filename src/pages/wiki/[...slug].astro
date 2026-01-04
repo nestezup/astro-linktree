@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const wikiEntries = await getCollection('wiki');
+  return wikiEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={`${entry.data.title} | Linktree Wiki`} description={entry.data.description}>
+    <!-- KaTeX CSS for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
+    <div class="glass-panel p-8 rounded-2xl animate-fade-in max-w-4xl w-full text-slate-200">
+        <div class="mb-6 pb-6 border-b border-white/10">
+            <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-white">{entry.data.title}</h1>
+            <div class="flex gap-2 mt-2">
+                {entry.data.tags?.map(tag => (
+                   <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">#{tag}</span> 
+                ))}
+            </div>
+        </div>
+
+        <div class="prose prose-invert prose-p:text-slate-300 prose-a:text-purple-400 prose-headings:text-white prose-code:text-purple-200 prose-pre:bg-slate-900/50">
+            <Content />
+        </div>
+
+        <div class="mt-8 pt-8 border-t border-white/10 flex justify-between text-sm text-slate-400">
+            <a href="/wiki" class="hover:text-purple-300 transition-colors">&larr; Back to Wiki Index</a>
+        </div>
+    </div>
+</Layout>
